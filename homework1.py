@@ -53,6 +53,7 @@ class ParseCat5ka(Parse5ka):
             url = f'{self.start_url}?categories={category["parent_group_code"]}'
             response_cat = self._get_response(url)
             data_cat: dict = response_cat.json()
+            data_cat = data_cat['results']
             category_path = self.save_path.joinpath(f"{category['parent_group_code']}.json")
             self._save(data_cat, category_path)
 
