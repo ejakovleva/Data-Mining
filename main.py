@@ -1,0 +1,13 @@
+from scrapy.crawler import CrawlerProcess
+from scrapy.settings import Settings
+#from scrapy.pipelines import ItemPipelineManager
+
+from gb_parse.spiders.autoyoula2 import AutoyoulaSpider
+
+if __name__ == '__main__':
+    crawler_settings = Settings()
+    crawler_settings.setmodule("gb_parse.settings")
+    crawler_process = CrawlerProcess(settings=crawler_settings)
+    crawler_process.crawl(AutoyoulaSpider)
+    crawler_process.start()
+
