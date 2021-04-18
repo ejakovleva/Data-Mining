@@ -1,5 +1,6 @@
 import scrapy
-import pymongo
+
+#сохранение в pymongo через файл pipelines!
 
 class AutoyoulaSpider(scrapy.Spider):
     name = "autoyoula"
@@ -35,4 +36,3 @@ class AutoyoulaSpider(scrapy.Spider):
                                        response.css('div.AdvertSpecs_data__xK2Qx *::text').getall()))
         }
         yield data
-
