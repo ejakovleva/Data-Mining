@@ -16,7 +16,7 @@ LOG_ENABLE = True
 LOG_LEVEL = "DEBUG"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36'
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:88.0) Gecko/20100101 Firefox/88.0'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -84,7 +84,7 @@ ITEM_PIPELINES = {
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 6
 RANDOMIZE_DOWNLOAD_DELAY = True
 # AUTOTHROTTLE_ENABLED = True
 # # The initial download delay

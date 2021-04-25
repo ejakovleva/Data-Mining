@@ -18,7 +18,7 @@ class AvitoSpider(scrapy.Spider):
         "title": "//span[@class='title-info-title-text']/text()",
         "price": "//span[@class='js-item-price']/text()",
         "address": "//span[@class='item-address__string']/text()",
-        "parameters": "//ul[@class='item-params-list//li']",
+        "parameters": "//ul[@class='item-params-list']//li",
         "author": "//div[@class='seller-info-name js-seller-info-name']//a/@href",
     }
 
@@ -31,10 +31,13 @@ class AvitoSpider(scrapy.Spider):
     #     yield from self._get_follow_xpath(
     #         response, self._xpath_selectors["brands"], self.brand_parse
     #     )
+    def _get_follow_xpath_pag(self, response, selector, callback, **kwargs):
+        for link in response.xpath(selector)[1:-1]:
+            yield response.follow(response.urljoin(f'?p={link.get()}'), callback=callback, cb_kwargs=kwargs)
 
     def parse(self, response, **kwargs):
-        yield from self._get_follow_xpath(
-            response, f'?p={self._xpath_selectors["pagination"]}', self.parse
+        yield from self._get_follow_xpath_pag(
+            response,  self._xpath_selectors["pagination"], self.parse
         )
         yield from self._get_follow_xpath(
             response, self._xpath_selectors["apartment"], self.apartment_parse,

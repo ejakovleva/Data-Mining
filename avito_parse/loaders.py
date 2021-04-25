@@ -32,11 +32,10 @@ def get_parameters(item: str) -> dict:
     selector = Selector(text=item)
     data = {
         "name": selector.xpath(
-            '//li[contains(@class, "item-params-label")]/text()'
+            "//span[contains(@class, 'item-params-label')]/text()"
         ).extract_first(),
-        "value": selector.xpath(
-            '//li[contains(@class, "item-params-label")]//text()'
-        ).extract_first(),
+        "value": [i for i in selector.xpath("//li[contains(@class, 'item-params-list')]/text()").getall()
+                  if i != ' ' and i != '\n  '][0],
     }
     return data
 
@@ -61,7 +60,7 @@ class AutoyoulaLoader(ItemLoader):
     price_out = TakeFirst()
     author_in = MapCompose(get_author_id)
     author_out = TakeFirst()
-    characteristics_in = MapCompose(get_characteristic)
+    # characteristics_in = MapCompose(get_characteristic)
 
 
 class AvitoLoader(ItemLoader):
@@ -73,3 +72,5 @@ class AvitoLoader(ItemLoader):
     address_out = TakeFirst()
     parameters_in = MapCompose(get_parameters)
     author_out = TakeFirst()
+
+
